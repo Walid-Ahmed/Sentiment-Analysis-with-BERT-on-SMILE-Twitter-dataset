@@ -77,3 +77,20 @@ def create_save_dataset(encoded_data_train,encoded_data_val):
   torch.save(dataset_train, 'data/dataset_train.pt')
   torch.save(dataset_val, 'data/dataset_val.pt')
   print("[INFO] Fils  dataset_train.pt and  dataset_val.pt saved to folder data")
+
+
+def main():
+    # The path to your CSV file
+    csv_file_path = "smileannotationsfinal.csv"
+    
+    # Preprocess the data
+    X_train, X_val, y_train, y_val = preprocess(csv_file_path)
+    
+    # Tokenize the data
+    encoded_data_train, encoded_data_val = tokenize(X_train, X_val)
+    
+    # Create and save the dataset
+    create_save_dataset(encoded_data_train, encoded_data_val)
+
+if __name__ == "__main__":
+    main()
