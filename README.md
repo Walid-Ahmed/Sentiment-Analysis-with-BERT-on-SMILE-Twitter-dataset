@@ -10,6 +10,9 @@ This repository contains the implementation of a sentiment analysis model using 
 
 The SMILE Twitter Emotion dataset was created by Wang, Bo; Tsakalidis, Adam; Liakata, Maria; Zubiaga, Arkaitz; Procter, Rob; Jensen, Eric in 2016. It includes tweets annotated with emotions such as happiness, anger, sadness, and others. For further details and to download the dataset, visit the [SMILE Twitter Emotion dataset page](https://doi.org/10.6084/m9.figshare.3187909.v2).
 
+sample_data.png
+![Sample 5 rows](figs/sample_data.png)
+
 ## Installation
 
 To run this project, ensure you have Python 3.6+ installed. Then, install the required packages using pip:
