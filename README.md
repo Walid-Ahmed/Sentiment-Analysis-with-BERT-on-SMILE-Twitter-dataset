@@ -27,7 +27,7 @@ First, preprocess the SMILE Twitter dataset to convert it into a format suitable
 ```
 python preprocess.py 
 ```
-This will save 2 files in data folder:   dataset_train.pt and dataset_val.pt'
+This will save 2 files in data folder:   dataset_train.pt and dataset_val.pt
 
 ### Model Training
 
