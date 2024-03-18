@@ -11,7 +11,7 @@ This repository contains the implementation of a sentiment analysis model using 
 tweet = "I hate this movie"
 label = predict_label(tweet)
 print(f"Predicted label: {label}")
-'''python
+
 
 ## Dataset
 
