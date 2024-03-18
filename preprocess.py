@@ -4,7 +4,7 @@ import torch
 import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
-
+import json
 
 def preprocess(data_path):
   df = pd.read_csv(data_path, names=['id', 'text', 'category'])
@@ -29,7 +29,7 @@ def preprocess(data_path):
     test_size = 0.15,
     random_state = 17,
     stratify = df.label.values)
-  return X_train, X_val, y_train, y_val
+  return X_train, X_val, y_train, y_val,num_unique_values,unique_values
 
 def tokenize(X_train,X_val):
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
@@ -63,7 +63,7 @@ def create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val):
   unique_elements = np.unique(y_train)
   # Get the number of unique elements
   num_unique_values = len(unique_elements)
-  
+
 
   labels_train = torch.tensor(y_train)
   labels_val = torch.tensor(y_val)
@@ -86,6 +86,18 @@ def create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val):
   print("[INFO] Fils  dataset_train.pt and  dataset_val.pt saved to folder data")
 
 
+  # Prepare the data to be stored in JSON format
+  data_to_store = {
+      'num_unique_values': num_unique_values,
+      'unique_values': unique_values
+  }
+
+  # Write the data to a JSON file
+  with open('data_info.json', 'w') as json_file:
+      json.dump(data_to_store, json_file, indent=4)
+
+  print("Data Info stored in data_info.json successfully.")
+  
 def main():
     # The path to your CSV file
     csv_file_path = "smileannotationsfinal.csv"
