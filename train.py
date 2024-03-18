@@ -8,9 +8,35 @@ import matplotlib.pyplot as plt
 import numpy as np
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
 
+import torch
+from transformers import BertForSequenceClassification
+from transformers import  get_linear_schedule_with_warmup
+import tqdm
+from tqdm import tqdm  # Import the tqdm function
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+import numpy as np
+from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
+import json
+
 def train():
+
   device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-  num_unique_values=6
+
+
+
+
+  # Load the data from the JSON file
+  with open('data_info.json', 'r') as json_file:
+      loaded_data = json.load(json_file)
+
+  # Extract values into variables
+  num_unique_values = loaded_data['num_unique_values']
+  unique_values = loaded_data['unique_values']
+
+  # Print the loaded data to verify
+  print(f"Number of Unique Values: {num_unique_values}")
+  print(f"Unique Values: {unique_values}")
 
   model = BertForSequenceClassification.from_pretrained(
     'bert-base-uncased',
@@ -78,9 +104,8 @@ def train():
   #save model
   torch.save(model.state_dict(), f'Bert_ft.pt')
   print("[INFO] Model saved to file  Bert_ft.pt")
-  
   plot(loss_values,epochs)
-
+  
 def plot(loss_values,epochs):
   # Plotting the training loss
   plt.figure(figsize=(10, 6))
@@ -90,6 +115,19 @@ def plot(loss_values,epochs):
   plt.xlabel("Epoch")
   plt.ylabel("Loss")
   plt.xticks(range(1, epochs+1))
+
+
+    # Define the folder name
+  folder_name = "results"
+
+  # Check if the folder exists, if not, create it
+  if not os.path.exists(folder_name):
+      os.makedirs(folder_name)
+      print("Folder results created.")
+  else:
+      print("Folder results already exists.")
+  plt.savefig(os.path.join("results", 'Training_Loss.png'))
+  print("[INFO] Training Loss saved to file Training_Loss.png in results folder")
   plt.show()
 
 
