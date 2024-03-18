@@ -114,4 +114,5 @@ def plot_save_confusion_matrix(unique_values,flat_true_labels, flat_predictions)
   plt.show()
 
 
-
+if __name__ == "__main__":
+   evalModel()
