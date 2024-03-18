@@ -29,7 +29,9 @@ First, preprocess the SMILE Twitter dataset to convert it into a format suitable
 ```
 python preprocess.py 
 ```
-This will save 2 files in data folder:   dataset_train.pt and dataset_val.pt
+This will save 2 files in data folder:   dataset_train.pt and dataset_val.pt with abother file data_info.json
+
+![Data Info](figs/data_info.png)
 
 ### Model Training
 
@@ -56,9 +58,9 @@ We utilize the `bert-base-uncased` model from the `transformers` library as our 
 
 After fine-tuning, the model achieves a notable accuracy in classifying tweets into their respective emotion categories. Detailed results and analysis will be found in the `results` folder.
 
-
-![Confusion Matrix](figs/confusion_matrix.png)
 ![Training Loss](figs/Training_Loss.png)
+![Confusion Matrix](figs/confusion_matrix.png)
+
 ##  Inference from saved model
 
 ```
