@@ -73,3 +73,8 @@ def predict_label(tweet):
 
   return label
 
+if __name__ == "__main__":
+    # Example usage
+    tweet = "I hate this movie"
+    label = predict_label(tweet)
+    print(f"for Tweet\"{tweet}\" Predicted label: {label}")
