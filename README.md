@@ -1,3 +1,4 @@
+![Confusion Matrix](confusion_matrix.png)
 
 
 # BERT Sentiment Analysis on SMILE Twitter Dataset
