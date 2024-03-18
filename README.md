@@ -33,7 +33,7 @@ python preprocess.py
 To fine-tune the BERT model on the preprocessed dataset, run:
 
 ```
-python train.py --data_path <path_to_processed_data>
+python train.py 
 ```
 
 ### Evaluation
