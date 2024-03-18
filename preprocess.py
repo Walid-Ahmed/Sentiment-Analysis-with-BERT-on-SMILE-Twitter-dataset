@@ -5,6 +5,7 @@ import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
+
 def preprocess(data_path):
   df = pd.read_csv(data_path, names=['id', 'text', 'category'])
   # Drop column 'id'
@@ -29,8 +30,8 @@ def preprocess(data_path):
     random_state = 17,
     stratify = df.label.values)
   return X_train, X_val, y_train, y_val
-  
-def tokenize(X_train,X_val):  
+
+def tokenize(X_train,X_val):
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
   encoded_data_train = tokenizer.batch_encode_plus(
       X_train,
@@ -40,23 +41,29 @@ def tokenize(X_train,X_val):
       padding='max_length',
       return_tensors = 'pt'
       ,truncation=True)
-  
+
   encoded_data_val = tokenizer.batch_encode_plus(
     X_val,
     add_special_tokens = True,
     return_attention_mask = True,
-    
+
     return_tensors = 'pt',
     padding='max_length',
     max_length = 256,)
   return encoded_data_train,encoded_data_val
 
-def create_save_dataset(encoded_data_train,encoded_data_val):  
+def create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val):
 
   input_ids_train = encoded_data_train['input_ids']
   attention_masks_train = encoded_data_train['attention_mask']
   input_ids_val = encoded_data_val['input_ids']
   attention_masks_val = encoded_data_val['attention_mask']
+
+  # Find unique elements
+  unique_elements = np.unique(y_train)
+  # Get the number of unique elements
+  num_unique_values = len(unique_elements)
+  
 
   labels_train = torch.tensor(y_train)
   labels_val = torch.tensor(y_val)
@@ -90,7 +97,7 @@ def main():
     encoded_data_train, encoded_data_val = tokenize(X_train, X_val)
     
     # Create and save the dataset
-    create_save_dataset(encoded_data_train, encoded_data_val)
+   create_save_dataset(encoded_data_train, encoded_data_val)
 
 if __name__ == "__main__":
-    main()
+   main()
