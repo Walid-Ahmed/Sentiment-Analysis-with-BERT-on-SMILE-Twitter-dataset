@@ -7,11 +7,11 @@ This repository contains the implementation of a sentiment analysis model using 
 
 ## Quck inference from saved model
 
-'''python
+```
 tweet = "I hate this movie"
 label = predict_label(tweet)
 print(f"Predicted label: {label}")
-
+```
 
 ## Dataset
 
