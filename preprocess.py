@@ -13,6 +13,7 @@ import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import json
+import numpy as np
 
 def preprocess(data_path):
   df = pd.read_csv(data_path, names=['id', 'text', 'category'])
