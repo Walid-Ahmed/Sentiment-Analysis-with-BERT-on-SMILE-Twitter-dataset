@@ -54,11 +54,11 @@ We utilize the `bert-base-uncased` model from the `transformers` library as our 
 
 ## Results
 
-After fine-tuning, the model achieves a notable accuracy in classifying tweets into their respective emotion categories. Detailed results and analysis will be found in the `results` section.
+After fine-tuning, the model achieves a notable accuracy in classifying tweets into their respective emotion categories. Detailed results and analysis will be found in the `results` folder.
 
 
 ![Confusion Matrix](figs/confusion_matrix.png)
-
+![Training Loss](figs/Training_Loss.png)
 ##  Inference from saved model
 
 ```
