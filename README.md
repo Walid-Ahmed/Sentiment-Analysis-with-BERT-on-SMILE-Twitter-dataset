@@ -1,4 +1,3 @@
-![Confusion Matrix](confusion_matrix.png)
 
 
 # BERT Sentiment Analysis on SMILE Twitter Dataset
@@ -50,9 +49,14 @@ python evaluate.py
 
 We utilize the `bert-base-uncased` model from the `transformers` library as our starting point, fine-tuning it on the emotion-labeled tweets. The fine-tuning process adjusts the pre-trained BERT model to better perform sentiment analysis specific to the SMILE dataset.
 
+
 ## Results
 
-After fine-tuning, the model achieves a notable accuracy in classifying tweets into their respective emotion categories. Detailed results and analysis can be found in the `results` section.
+After fine-tuning, the model achieves a notable accuracy in classifying tweets into their respective emotion categories. Detailed results and analysis will be found in the `results` section.
+
+
+![Confusion Matrix](confusion_matrix.png)
+
 
 ## Contribution
 
