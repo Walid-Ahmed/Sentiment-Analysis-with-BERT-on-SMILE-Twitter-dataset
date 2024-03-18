@@ -25,7 +25,7 @@ This command will install all necessary libraries, including `transformers`, `to
 First, preprocess the SMILE Twitter dataset to convert it into a format suitable for BERT training:
 
 ```
-python preprocess.py --data_path <path_to_dataset>
+python preprocess.py 
 ```
 
 ### Model Training
