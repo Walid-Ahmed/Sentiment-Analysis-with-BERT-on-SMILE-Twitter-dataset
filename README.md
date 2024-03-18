@@ -39,10 +39,10 @@ python train.py
 
 ### Evaluation
 
-Evaluate the model's performance on the test set:
+Evaluate the model's performance on the evaluation  dataset:
 
 ```
-python evaluate.py --model_path <path_to_trained_model> --data_path <path_to_processed_data>
+python evaluate.py 
 ```
 
 ## Model
