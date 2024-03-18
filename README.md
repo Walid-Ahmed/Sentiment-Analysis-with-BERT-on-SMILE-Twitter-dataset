@@ -82,4 +82,4 @@ This project is open-sourced under the MIT License. See the LICENSE file for mor
 
 ---
 
-This README template is structured to provide a clear overview of the project, including how to set it up, use it, and contribute to it, making it accessible for others to use and contribute to the project.
+
