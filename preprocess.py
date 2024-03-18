@@ -6,6 +6,14 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 import json
 
+from transformers import BertTokenizer
+from torch.utils.data import TensorDataset
+import torch
+import os
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import json
+
 def preprocess(data_path):
   df = pd.read_csv(data_path, names=['id', 'text', 'category'])
   # Drop column 'id'
@@ -29,7 +37,7 @@ def preprocess(data_path):
     test_size = 0.15,
     random_state = 17,
     stratify = df.label.values)
-  return X_train, X_val, y_train, y_val,num_unique_values,unique_values
+  return X_train, X_val, y_train, y_val,num_unique_values,unique_values,label_to_category
 
 def tokenize(X_train,X_val):
   tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
@@ -52,7 +60,7 @@ def tokenize(X_train,X_val):
     max_length = 256,)
   return encoded_data_train,encoded_data_val
 
-def create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val):
+def create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val,label_to_category):
 
   input_ids_train = encoded_data_train['input_ids']
   attention_masks_train = encoded_data_train['attention_mask']
@@ -89,7 +97,8 @@ def create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val):
   # Prepare the data to be stored in JSON format
   data_to_store = {
       'num_unique_values': num_unique_values,
-      'unique_values': unique_values
+      'unique_values': unique_values,
+      'label_to_category':label_to_category
   }
 
   # Write the data to a JSON file
