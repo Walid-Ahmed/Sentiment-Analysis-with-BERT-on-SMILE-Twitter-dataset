@@ -4,6 +4,15 @@
 
 This repository contains the implementation of a sentiment analysis model using the BERT (Bidirectional Encoder Representations from Transformers) architecture, fine-tuned on the SMILE Twitter dataset. The SMILE Twitter dataset, curated by Wang et al., encompasses a variety of tweets labeled with emotions, providing a rich source for sentiment analysis tasks.
 
+
+## Quck inference from saved model
+
+'''
+tweet = "I hate this movie"
+label = predict_label(tweet)
+print(f"Predicted label: {label}")
+
+'''
 ## Dataset
 
 The SMILE Twitter Emotion dataset was created by Wang, Bo; Tsakalidis, Adam; Liakata, Maria; Zubiaga, Arkaitz; Procter, Rob; Jensen, Eric in 2016. It includes tweets annotated with emotions such as happiness, anger, sadness, and others. For further details and to download the dataset, visit the [SMILE Twitter Emotion dataset page](https://doi.org/10.6084/m9.figshare.3187909.v2).
