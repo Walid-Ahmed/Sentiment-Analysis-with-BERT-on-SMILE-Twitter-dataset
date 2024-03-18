@@ -1,5 +1,12 @@
-
-
+import torch
+from transformers import BertForSequenceClassification
+from transformers import  get_linear_schedule_with_warmup
+import tqdm
+from tqdm import tqdm  # Import the tqdm function
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+import numpy as np
+from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
 
 def train():
   device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -68,12 +75,11 @@ def train():
 
       print(f"Epoch {epoch} | Average Training Loss: {avg_train_loss}")
 
-      #save model
-      torch.save(model.state_dict(), f'Bert_ft.pt')
-      print("[INFO] Model saved to file  Bert_ft.pt")
+  #save model
+  torch.save(model.state_dict(), f'Bert_ft.pt')
+  print("[INFO] Model saved to file  Bert_ft.pt")
+  
   plot(loss_values,epochs)
-
-
 
 def plot(loss_values,epochs):
   # Plotting the training loss
