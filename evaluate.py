@@ -7,6 +7,8 @@ import json
 import seaborn as sns
 import os
 
+
+
 def evalModel():
   device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
   num_unique_values=6
@@ -20,10 +22,14 @@ def evalModel():
   # Extract values into variables
   num_unique_values = loaded_data['num_unique_values']
   unique_values = loaded_data['unique_values']
+  label_to_category=loaded_data['label_to_category']
+  
 
   # Print the loaded data to verify
   print(f"Number of Unique Values: {num_unique_values}")
   print(f"Unique Values: {unique_values}")
+  print(f"label_to_category: {label_to_category}")
+
 
   # Load fine-tuned-model 
   model = BertForSequenceClassification.from_pretrained("bert-base-uncased",
@@ -81,7 +87,6 @@ def evalModel():
   print(f"Accuracy: {accuracy}")
   plot_save_confusion_matrix(unique_values,flat_true_labels, flat_predictions)
 
-
 def plot_save_confusion_matrix(unique_values,flat_true_labels, flat_predictions):
   class_labels = unique_values
 
@@ -112,6 +117,7 @@ def plot_save_confusion_matrix(unique_values,flat_true_labels, flat_predictions)
       print("Folder results already exists.")
   plt.savefig(os.path.join("results", 'confusion_matrix.png'))
   plt.show()
+
 
 
 if __name__ == "__main__":
