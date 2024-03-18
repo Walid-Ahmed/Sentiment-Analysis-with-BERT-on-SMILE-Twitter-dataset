@@ -87,4 +87,6 @@ def plot(loss_values,epochs):
   plt.show()
 
 
+if __name__ == "__main__":
+   train()
 
