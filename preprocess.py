@@ -113,13 +113,14 @@ def main():
     csv_file_path = "smileannotationsfinal.csv"
     
     # Preprocess the data
-    X_train, X_val, y_train, y_val = preprocess(csv_file_path)
+    X_train, X_val, y_train, y_val,num_unique_values,unique_values,label_to_category=preprocess("smileannotationsfinal.csv")
     
     # Tokenize the data
     encoded_data_train, encoded_data_val = tokenize(X_train, X_val)
     
     # Create and save the dataset
-   create_save_dataset(encoded_data_train, encoded_data_val)
+    create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val,label_to_category)
+
 
 if __name__ == "__main__":
    main()
