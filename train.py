@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
 import json
-
+import os
 def train():
 
   device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -56,7 +56,7 @@ def train():
     eps = 1e-8)
 
   epochs=10
-  batch_size = 4 #32
+  batch_size = 4
 
 
   dataset_train=torch.load('data/dataset_train.pt')

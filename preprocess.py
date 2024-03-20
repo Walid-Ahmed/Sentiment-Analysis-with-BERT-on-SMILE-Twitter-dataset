@@ -61,7 +61,7 @@ def tokenize(X_train,X_val):
     max_length = 256,)
   return encoded_data_train,encoded_data_val
 
-def create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val,label_to_category):
+def create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val,label_to_category,unique_values):
 
   input_ids_train = encoded_data_train['input_ids']
   attention_masks_train = encoded_data_train['attention_mask']
@@ -119,7 +119,7 @@ def main():
     encoded_data_train, encoded_data_val = tokenize(X_train, X_val)
     
     # Create and save the dataset
-    create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val,label_to_category)
+    create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val,label_to_category,unique_values)
 
 
 if __name__ == "__main__":
