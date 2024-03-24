@@ -5,6 +5,9 @@
 This repository contains the implementation of a sentiment analysis model using the BERT (Bidirectional Encoder Representations from Transformers) architecture, fine-tuned on the SMILE Twitter dataset. The SMILE Twitter dataset, curated by Wang et al., encompasses a variety of tweets labeled with emotions, providing a rich source for sentiment analysis tasks.
 
 
+BERT is designed to include a special token, [CLS], at the beginning of each input sequence. During pre-training, BERT learns to use this token for classification tasks.
+For sentence-level classification tasks (e.g., sentiment analysis), the embedding of the [CLS] token, after processing by BERT, can be used as the aggregate representation of the sentence. This embedding is then fed into a classification layer to make predictions.
+The [CLS] token is explicitly trained to capture the context useful for classification tasks, making it a strong choice for these types of problems
 
 ## Dataset
 
