@@ -7,16 +7,6 @@ from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import numpy as np
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
-
-import torch
-from transformers import BertForSequenceClassification
-from transformers import  get_linear_schedule_with_warmup
-import tqdm
-from tqdm import tqdm  # Import the tqdm function
-from sklearn.metrics import confusion_matrix
-import matplotlib.pyplot as plt
-import numpy as np
-from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
 import json
 import os
 def train():
