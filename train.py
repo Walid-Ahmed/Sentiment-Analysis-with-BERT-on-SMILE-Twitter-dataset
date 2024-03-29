@@ -72,15 +72,21 @@ def train():
       total_loss = 0
 
       for step, batch in enumerate(tqdm(dataloader_train, desc=f"Epoch {epoch}")):
-          batch = tuple(t.to(device) for t in batch)
-          inputs = {'input_ids':      batch[0],
-                    'attention_mask': batch[1],
-                    'labels':         batch[2]}
+        
+          # Move each component of the batch to the GPU
+          input_ids = batch['input_ids'].to(device)
+          attention_mask = batch['attention_mask'].to(device)
+          labels = batch['labels'].to(device)  # Only if you're doing supervised learning
+    
 
           model.zero_grad()
+        
+          outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
 
-          outputs = model(**inputs)
           loss = outputs[0]
+
+
+        
           total_loss += loss.item()
 
           loss.backward()
