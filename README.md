@@ -62,7 +62,6 @@ We utilize the `bert-base-uncased` model from the `transformers` library as our 
 ![Model](figs/model.png)
 
 
-Certainly! Here's a concise version of the `TextDataset` class summary for inclusion in your GitHub README file:
 
 ---
 
