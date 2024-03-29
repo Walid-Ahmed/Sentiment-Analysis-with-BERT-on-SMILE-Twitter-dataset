@@ -1,3 +1,5 @@
+#python preprocess.py
+
 from transformers import BertTokenizer
 from torch.utils.data import TensorDataset
 import torch
@@ -14,6 +16,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 import json
 import numpy as np
+from TextDataset import TextDataset
+
 
 def preprocess(data_path):
   df = pd.read_csv(data_path, names=['id', 'text', 'category'])
@@ -40,33 +44,11 @@ def preprocess(data_path):
     stratify = df.label.values)
   return X_train, X_val, y_train, y_val,num_unique_values,unique_values,label_to_category
 
-def tokenize(X_train,X_val):
-  tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
-  encoded_data_train = tokenizer.batch_encode_plus(
-      X_train,
-      add_special_tokens = True,
-      return_attention_mask = True,
-      max_length = 256,
-      padding='max_length',
-      return_tensors = 'pt'
-      ,truncation=True)
 
-  encoded_data_val = tokenizer.batch_encode_plus(
-    X_val,
-    add_special_tokens = True,
-    return_attention_mask = True,
 
-    return_tensors = 'pt',
-    padding='max_length',
-    max_length = 256,)
-  return encoded_data_train,encoded_data_val
+def create_save_dataset(train_dataset,val_dataset,y_train,y_val,label_to_category,unique_values):
 
-def create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val,label_to_category,unique_values):
 
-  input_ids_train = encoded_data_train['input_ids']
-  attention_masks_train = encoded_data_train['attention_mask']
-  input_ids_val = encoded_data_val['input_ids']
-  attention_masks_val = encoded_data_val['attention_mask']
 
   # Find unique elements
   unique_elements = np.unique(y_train)
@@ -76,8 +58,7 @@ def create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val,label_
 
   labels_train = torch.tensor(y_train)
   labels_val = torch.tensor(y_val)
-  dataset_train = TensorDataset(input_ids_train, attention_masks_train, labels_train)
-  dataset_val = TensorDataset(input_ids_val, attention_masks_val, labels_val)
+
 
   # Save the datasets
 
@@ -114,12 +95,22 @@ def main():
     
     # Preprocess the data
     X_train, X_val, y_train, y_val,num_unique_values,unique_values,label_to_category=preprocess("smileannotationsfinal.csv")
+    train_texts,val_texts=X_train, X_val
+
+    y_train = torch.tensor(y_train)
+    y_val = torch.tensor(y_val)
+
+
+    # Create separate dataset instances for training and validation
+    train_dataset = TextDataset(train_texts,y_train)
+    val_dataset = TextDataset(val_texts,y_val)
+
+
     
-    # Tokenize the data
-    encoded_data_train, encoded_data_val = tokenize(X_train, X_val)
+
     
     # Create and save the dataset
-    create_save_dataset(encoded_data_train,encoded_data_val,y_train,y_val,label_to_category,unique_values)
+    #create_save_dataset(train_dataset,val_dataset,y_train,y_val,label_to_category,unique_values)
 
 
 if __name__ == "__main__":
