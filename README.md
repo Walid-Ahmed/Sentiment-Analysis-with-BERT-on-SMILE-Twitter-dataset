@@ -61,6 +61,36 @@ We utilize the `bert-base-uncased` model from the `transformers` library as our 
 
 ![Model](figs/model.png)
 
+
+Certainly! Here's a concise version of the `TextDataset` class summary for inclusion in your GitHub README file:
+
+---
+
+## TextDataset Class Overview
+
+The `TextDataset` class is a custom PyTorch dataset for preparing text data for NLP models like BERT. It handles tokenization, padding, truncation, and attention mask generation, streamlining the process of converting raw text into model-ready formats. Optionally, it can also manage labels for supervised tasks.
+
+**Key Features:**
+- Utilizes Hugging Face's `BertTokenizer` for efficient tokenization.
+- Automatically pads or truncates texts to a uniform length.
+- Generates attention masks to differentiate data from padding.
+- Supports inclusion of labels for each text input.
+
+**Usage:**
+
+```python
+dataset = TextDataset(texts=["Sample text"], labels=[0])
+dataloader = DataLoader(dataset, batch_size=1)
+```
+
+**Requirements:** PyTorch, Hugging Face `transformers`.
+
+This class simplifies data preprocessing for training and evaluating transformer-based NLP models.
+
+--- 
+
+This summary provides a clear, brief overview of what the `TextDataset` class does, how to use it, and its dependencies, making it suitable for a quick reference in your project's README file.
+
 ## Results
 
 After fine-tuning, the model achieves a notable accuracy in classifying tweets into their respective emotion categories. Detailed results and analysis will be found in the `results` folder.
